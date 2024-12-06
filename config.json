@@ -1,0 +1,60 @@
+{
+	"batteries": ["BIGSTAR_ALL", "BR_ARROW_ALL", "PYR_PYRON1", "IMP_RN1", "FIFTHS_7_N002"],
+	"timezones":
+	{
+		"BIGSTAR_ALL":			"US/Central",
+		"BR_ARROW_ALL":			"US/Central",
+		"PYR_PYRON1":			"US/Central",
+		"IMP_RN1":				"US/Central",
+		"FIFTHS_7_N002":		"US/Pacific"
+	},
+	"forecast":
+	{
+		"BIGSTAR_ALL":			{"function": "get_enertel_forecast_for_ERCOT_from_s3", "patterns": ["ercot-rtlmp-90_BIGSTAR_ALL", "ercot-rtlmp-12_BIGSTAR_ALL"]},
+		"BR_ARROW_ALL":			{"function": "get_enertel_forecast_for_ERCOT_from_s3", "patterns": ["ercot-rtlmp-90_BR_ARROW_ALL", "ercot-rtlmp-12_BR_ARROW_ALL"]},
+		"PYR_PYRON1":			{"function": "get_enertel_forecast_for_ERCOT_from_s3", "patterns": ["ercot-rtlmp-90_PYR_PYRON1", "ercot-rtlmp-12_PYR_PYRON1"]},
+		"IMP_RN1":				{"function": "get_enertel_forecast_for_ERCOT_from_s3", "patterns": ["ercot-rtlmp-90_IMP_RN1", "ercot-rtlmp-12_IMP_RN1"]},
+		"FIFTHS_7_N002":		{"function": "get_enertel_forecast_for_CAISO_from_s3", "patterns": ["caiso-rtlmp-90_FIFTHS_7_N002"]}
+	},
+	"rtlmp":
+	{
+		"BIGSTAR_ALL":			{"function": "get_actual_rtlmp_from_dremio", "table": "ERCOT", "objectid": "10016893667"},
+		"BR_ARROW_ALL":			{"function": "get_actual_rtlmp_from_dremio", "table": "ERCOT", "objectid": "10017077394"},
+		"PYR_PYRON1":			{"function": "get_actual_rtlmp_from_dremio", "table": "ERCOT", "objectid": "10000698760"},
+		"IMP_RN1":				{"function": "get_actual_rtlmp_from_dremio", "table": "ERCOT", "objectid": "10016246146"},
+		"FIFTHS_7_N002":		{"function": "get_actual_rtlmp_from_dremio", "table": "CAISO", "objectid": "10017024598"}
+	},
+	"dalmp":
+	{
+		"BIGSTAR_ALL":			{"function": "get_actual_dalmp_from_dremio", "table": "ERCOT", "objectid": "10016893667"},
+		"BR_ARROW_ALL":			{"function": "get_actual_dalmp_from_dremio", "table": "ERCOT", "objectid": "10017077394"},
+		"PYR_PYRON1":			{"function": "get_actual_dalmp_from_dremio", "table": "ERCOT", "objectid": "10000698760"},
+		"IMP_RN1":				{"function": "get_actual_dalmp_from_dremio", "table": "ERCOT", "objectid": "10016246146"},
+		"FIFTHS_7_N002":		{"function": "get_actual_dalmp_from_dremio", "table": "CAISO", "objectid": "10017024598"}
+	},
+	"settings":
+	{
+		"n_days": 28,
+		"forecast_creation_hour": 23
+	},
+    "s3":
+    {
+        "bucket": "hdg-us-st-fundamentaldata-653768265138",
+        "directory": "forecast_enertel"
+    },
+    "dremio":
+    {
+        "driver": "Dremio Connector",
+        "host": "dremio.lid-prod.aws-eu1.energy.local",
+        "port": "31010",
+        "token": "MzJqSBcFSdeV+PjfZb1BoB8bfYLjvHWb5RGgOm67ZCB75CkBAiWOa9B3RWzQVg=="
+    },
+	"report":
+	{
+		"buckets":
+		{
+			"hours": [[0,4],[5,8],[9,13],[14,16],[17,20],[21,23]],
+			"prices": [[-500,0],[0,25],[25,55],[55,120],[120,250],[250,5000]]
+		}
+	}
+}
