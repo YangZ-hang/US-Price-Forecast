@@ -7,6 +7,7 @@ import sys
 import os
 sys.path.append('Streamlit exploration')
 from get_data import DataFetcher
+import boto3
 
 
 # Set Streamlit to wide layout
